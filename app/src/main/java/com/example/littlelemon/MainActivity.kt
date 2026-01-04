@@ -55,7 +55,9 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable(Home.route) {
-                            HomeActivity()
+                            HomeActivity {
+                                navController.navigate(Profile.route)
+                            }
                         }
                         composable(Greeting.route) {
                             GreetingActivity(name="Android", modifier = Modifier.padding(innerPadding))

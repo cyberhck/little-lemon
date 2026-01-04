@@ -36,7 +36,7 @@ fun OnboardingActivity(
     Column(modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight()) {
-        Topbar(null)
+        Topbar(null, null)
         Row(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primary)

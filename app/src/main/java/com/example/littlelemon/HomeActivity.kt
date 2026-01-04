@@ -48,7 +48,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 @Composable
-fun HomeActivity() {
+fun HomeActivity(onProfileIconClick: (() -> Unit)?) {
     var menuItems by remember { mutableStateOf<List<MenuItem>>(emptyList()) }
     LaunchedEffect(Unit) {
         menuItems = withContext(Dispatchers.IO) {
@@ -57,24 +57,13 @@ fun HomeActivity() {
     }
     var searchPhrase by rememberSaveable { mutableStateOf("") }
     var categoryFilter by rememberSaveable { mutableStateOf("") }
-//    val itemsToDisplay = menuItems.filter {
-//        if (searchPhrase == "") {
-//            return@filter true
-//        }
-//        return@filter it.title.contains(searchPhrase) || it.description.contains(searchPhrase)
-//    }.filter{
-//        if (categoryFilter == "") {
-//            return@filter true
-//        }
-//        return@filter it.category == categoryFilter
-//    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Topbar(painterResource(R.drawable.profile))
+            Topbar(painterResource(R.drawable.profile), onProfileIconClick = onProfileIconClick)
         }
         Column(
             modifier = Modifier
@@ -190,7 +179,7 @@ fun HomeActivityPreview() {
     LittleLemonTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) {
             Row(modifier = Modifier.padding(it)) {
-                HomeActivity()
+                HomeActivity(null)
             }
         }
     }
