@@ -28,10 +28,10 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences("little_lemon", MODE_PRIVATE)
         val profile = sharedPreferences.getString("profile", null)
         val initialRoute = if (profile == null) {
-            Home.route
+            Onboarding.route
         }
         else {
-            Onboarding.route
+            Home.route
         }
         setContent {
             LittleLemonTheme {
@@ -52,6 +52,7 @@ class MainActivity : ComponentActivity() {
                         composable(Profile.route) {
                             ProfileActivity(profile ?: "dummy|dummy|dummy@example.com") {
                                 sharedPreferences.edit(commit = true) { clear() }
+                                navController.navigate(Onboarding.route)
                             }
                         }
                         composable(Home.route) {
