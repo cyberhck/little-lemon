@@ -1,6 +1,7 @@
 package com.example.littlelemon
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +19,11 @@ import com.example.littlelemon.navigation.Home
 import com.example.littlelemon.navigation.Onboarding
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
+import com.example.littlelemon.navigation.Greeting
 import com.example.littlelemon.navigation.Profile
+import com.example.littlelemon.network.Repo
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,7 @@ class MainActivity : ComponentActivity() {
         else {
             Onboarding.route
         }
+        Log.d("main", initialRoute)
         setContent {
             LittleLemonTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -56,7 +62,10 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable(Home.route) {
-                            Greeting(name="Android", modifier = Modifier.padding(innerPadding))
+                            HomeActivity(listOf())
+                        }
+                        composable(Greeting.route) {
+                            GreetingActivity(name="Android", modifier = Modifier.padding(innerPadding))
                         }
                     }
                 }
@@ -66,7 +75,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun GreetingActivity(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -77,6 +86,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     LittleLemonTheme {
-        Greeting("Android")
+        GreetingActivity("Android")
     }
 }

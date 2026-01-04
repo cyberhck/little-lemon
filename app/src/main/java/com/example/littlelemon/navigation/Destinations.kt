@@ -11,6 +11,10 @@ object Home: Destination {
     override val route: String = "Home"
 }
 
+object Greeting: Destination {
+    override val route: String = "Greeting"
+}
+
 object Profile: Destination {
     override val route: String = "Profile"
 }
