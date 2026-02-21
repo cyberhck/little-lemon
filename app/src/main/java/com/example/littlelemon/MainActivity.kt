@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val sharedPreferences = getSharedPreferences("little_lemon", MODE_PRIVATE)
-        val profile = sharedPreferences.getString("profile", null)
+        var profile = sharedPreferences.getString("profile", null)
         val initialRoute = if (profile == null) {
             Onboarding.route
         }
@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                                         "$firstName|$lastName|$email"
                                     )
                                 }
+                                profile = "$firstName|$lastName|$email"
                                 navController.navigate(Home.route)
                             }
                         }

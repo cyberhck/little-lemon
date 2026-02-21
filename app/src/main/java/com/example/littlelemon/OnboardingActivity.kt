@@ -104,6 +104,7 @@ fun OnboardingActivity(
                 onClick = {
                     onRegister(firstName, lastName, email)
                 },
+                enabled = !(firstName=="" || lastName==""||email==""),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.secondary,
                     contentColor = MaterialTheme.colorScheme.tertiary
